@@ -159,7 +159,7 @@ func (c *Card) MethodValidate() (Company, error) {
 		return Company{"maestro", "Maestro"}, nil
 	case ccDigits.At(4) == 5019:
 		return Company{"dankort", "Dankort"}, nil
-	case ccDigits.At(2) >= 51 && ccDigits.At(2) <= 55:
+	case (ccDigits.At(2) >= 51 && ccDigits.At(2) <= 55) || (ccDigits.At(2) >= 22 && ccDigits.At(2) <= 27):
 		return Company{"mastercard", "MasterCard"}, nil
 	case ccDigits.At(4) == 4026 || ccDigits.At(6) == 417500 || ccDigits.At(4) == 4405 || ccDigits.At(4) == 4508 || ccDigits.At(4) == 4844 || ccDigits.At(4) == 4913 || ccDigits.At(4) == 4917:
 		return Company{"visa electron", "Visa Electron"}, nil

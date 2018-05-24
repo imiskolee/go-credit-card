@@ -2,6 +2,7 @@ package creditcard
 
 import (
 	. "github.com/smartystreets/goconvey/convey"
+	"fmt"
 	"strconv"
 	"testing"
 	"time"
@@ -369,3 +370,10 @@ func TestMethod(t *testing.T) {
 		})
 	})
 }
+
+
+func TestCard(t *testing.T) {
+	card := Card{Number:"36018612345678"}
+	v,err := card.MethodValidate()
+	fmt.Print(v,err)
+	}

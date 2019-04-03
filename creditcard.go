@@ -139,7 +139,7 @@ func (c *Card) MethodValidate() (Company, error) {
 		return Company{"amex", "American Express"}, nil
 	case ccDigits.At(4) == 5610 || (ccDigits.At(6) >= 560221 && ccDigits.At(6) <= 560225):
 		return Company{"bankcard", "Bankcard"}, nil
-	case ccDigits.At(2) == 62:
+	case ccDigits.At(2) == 62 || ccDigits.At(2) == 81:
 		return Company{"china unionpay", "China UnionPay"}, nil
 	case ccDigits.At(3) >= 300 && ccDigits.At(3) <= 305 && ccLen == 15:
 		return Company{"diners club carte blanche", "Diners Club Carte Blanche"}, nil

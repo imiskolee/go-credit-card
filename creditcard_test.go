@@ -1,8 +1,8 @@
 package creditcard
 
 import (
-	. "github.com/smartystreets/goconvey/convey"
 	"fmt"
+	. "github.com/smartystreets/goconvey/convey"
 	"strconv"
 	"testing"
 	"time"
@@ -362,8 +362,25 @@ func TestMethod(t *testing.T) {
 		})
 
 		Convey("Should work for Visa", func() {
-			card := Card{Number: "4242424242", Cvv: "1111", Month: month, Year: year}
+			// 13位
+			card := Card{Number: "4514611983866", Cvv: "1111", Month: month, Year: year}
 			err := card.Method()
+
+			So(err, ShouldBeNil)
+			So(card.Company.Short, ShouldEqual, "visa")
+			So(card.Company.Long, ShouldEqual, "Visa")
+
+			// 16位
+			card = Card{Number: "4514611983866000", Cvv: "1111", Month: month, Year: year}
+			err = card.Method()
+
+			So(err, ShouldBeNil)
+			So(card.Company.Short, ShouldEqual, "visa")
+			So(card.Company.Long, ShouldEqual, "Visa")
+
+			// 19位
+			card = Card{Number: "4514611983866000000", Cvv: "1111", Month: month, Year: year}
+			err = card.Method()
 
 			So(err, ShouldBeNil)
 			So(card.Company.Short, ShouldEqual, "visa")
@@ -381,9 +398,8 @@ func TestMethod(t *testing.T) {
 	})
 }
 
-
 func TestCard(t *testing.T) {
-	card := Card{Number:"36018612345678"}
-	v,err := card.MethodValidate()
-	fmt.Print(v,err)
-	}
+	card := Card{Number: "36018612345678"}
+	v, err := card.MethodValidate()
+	fmt.Print(v, err)
+}
